@@ -4,5 +4,6 @@
 /doc/
 /log/*.log
 /pkg/
+/spec/dummy/log/*.log
 /tmp/
 .byebug_history

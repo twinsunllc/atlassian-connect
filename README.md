@@ -1,5 +1,5 @@
 # Atlassian::Connect
-Short description and motivation.
+Atlassian Connect integration for Ruby on Rails.
 
 ## Usage
 How to use my plugin.
@@ -21,8 +21,15 @@ Or install it yourself as:
 $ gem install atlassian-connect
 ```
 
-## Contributing
-Contribution directions go here.
+## Testing
+Execute the following to migrate the database and test against the `spec/dummy` app:
+
+```bash
+cd spec/dummy
+bin/rails db:migrate RAILS_ENV=TEST
+cd ../../
+rspec
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

@@ -40,17 +40,7 @@ RSpec.configure do |config|
     config.fabricator_path = 'spec/fabricators'
     config.path_prefix = ENGINE_ROOT
   end
-
   Fabrication.manager.load_definitions
-  Fabrication::Config.path_prefixes.each do |prefix|
-    puts "prefix: #{prefix}"
-    Fabrication::Config.fabricator_paths.each do |folder|
-      puts "folder: #{folder}"
-      Dir.glob(File.join(prefix.to_s, folder, '**', '*.rb')).sort.each do |file|
-        puts "file: #{file}"
-      end
-    end
-  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
