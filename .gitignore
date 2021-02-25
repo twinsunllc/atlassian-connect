@@ -1,0 +1,8 @@
+/.bundle/
+/.env
+/.idea/
+/doc/
+/log/*.log
+/pkg/
+/tmp/
+.byebug_history
