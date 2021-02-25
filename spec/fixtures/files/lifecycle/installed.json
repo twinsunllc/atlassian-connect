@@ -1,0 +1,30 @@
+{
+  "key": "com.twinsunsolutions.jira.atlassian-connect",
+  "clientKey": "75cb2b5a-b7cb-3e86-90c2-0f24630ab75f",
+  "oauthClientId": "eyJob3N0S2V5IjoiNzVjYjJiNWEtYjdjYi0zZTg2LTkwYzItMGYyNDYzMGFiNzVmIiwiYWRkb25LZXkiOiJpby5zdXNwZWN0LmppcmEuYnVzaW5lc3N0aW1lIn0=",
+  "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCa0mCABKxqOeunmqP3kYRBotWDVmas7VkM5L23fIBqE2svojt+fMoTPvSUf/3axrpXmBbFzCFzK/azVJc6k8u4VtGR/SWnzZ62cQe+5K0TTB7NGk9dC4I6bloZRfrf/my14FS9chNCdQ7EtFwal77X9IgI+TX/dFxVwcK05mgjTwIDAQAB",
+  "sharedSecret": "JplHraxmxGCpMQcDFNoktV7eimL7lzBqDQSn5KvhsgnDvSserSdP8tCeY2YPU16PiRLhhsVHRIvytLRrinS8HA",
+  "serverVersion": "100095",
+  "pluginsVersion": "1.223.0",
+  "baseUrl": "https://awesome-client.atlassian.net",
+  "productType": "jira",
+  "description": "Atlassian JIRA at https://awesome-client.atlassian.net ",
+  "eventType": "installed",
+  "user_key": "admin",
+  "format": "json",
+  "controller": "lifecycle",
+  "action": "installed",
+  "lifecycle": {
+    "key": "com.twinsunsolutions.jira.atlassian-connect",
+    "clientKey": "75cb2b5a-b7cb-3e86-90c2-0f24630ab75f",
+    "oauthClientId": "eyJob3N0S2V5IjoiNzVjYjJiNWEtYjdjYi0zZTg2LTkwYzItMGYyNDYzMGFiNzVmIiwiYWRkb25LZXkiOiJpby5zdXNwZWN0LmppcmEuYnVzaW5lc3N0aW1lIn0=",
+    "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCa0mCABKxqOeunmqP3kYRBotWDVmas7VkM5L23fIBqE2svojt+fMoTPvSUf/3axrpXmBbFzCFzK/azVJc6k8u4VtGR/SWnzZ62cQe+5K0TTB7NGk9dC4I6bloZRfrf/my14FS9chNCdQ7EtFwal77X9IgI+TX/dFxVwcK05mgjTwIDAQAB",
+    "sharedSecret": "JplHraxmxGCpMQcDFNoktV7eimL7lzBqDQSn5KvhsgnDvSserSdP8tCeY2YPU16PiRLhhsVHRIvytLRrinS8HA",
+    "serverVersion": "100095",
+    "pluginsVersion": "1.223.0",
+    "baseUrl": "https://awesome-client.atlassian.net",
+    "productType": "jira",
+    "description": "Atlassian JIRA at https://awesome-client.atlassian.net ",
+    "eventType": "installed"
+  }
+}
