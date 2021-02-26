@@ -9,6 +9,7 @@ module Atlassian
       mattr_accessor :description
       mattr_accessor :enable_licensing
       mattr_accessor :key
+      mattr_accessor :links
       mattr_accessor :modules
       mattr_accessor :name
       mattr_accessor :post_install_url
@@ -22,7 +23,9 @@ module Atlassian
         self.api_version = 1
         self.enable_licensing = false
         self.key = 'TODO.CHANGE-ME'
+        self.links = {}
         self.modules = {}
+        self.name = 'TODO - CHANGE ME'
         self.scopes = %w(act_as_user read write)
       end
 
@@ -54,6 +57,9 @@ module Atlassian
       if !configuration.api_version.nil?
         raise ArgumentError.new('Invalid value for `api_version`') unless configuration.api_version.is_a?(Integer)
       end
+
+      raise ArgumentError.new('Invalid value for `enable_licensing`') unless configuration.enable_licensing.in?([true, false])
+      raise ArgumentError.new('Invalid value for `name`') unless configuration.name.is_a?(String) && configuration.name.present?
     end
   end
 end

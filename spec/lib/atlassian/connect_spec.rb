@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe Atlassian::Connect, type: :engine do
   before(:each) do
     Atlassian::Connect::Configuration.reset
+    Atlassian::Connect.configure do |config|
+      config.name = 'placeholder'
+    end
   end
 
   describe 'defaults' do
@@ -53,6 +56,71 @@ RSpec.describe Atlassian::Connect, type: :engine do
           config.api_version = 'only integers allowed'
         end
       }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe 'enable_licensing' do
+    it 'accepts valid values' do
+      Atlassian::Connect.configure do |config|
+        config.enable_licensing = true
+      end
+      Atlassian::Connect.configure do |config|
+        config.enable_licensing = false
+      end
+    end
+
+    it 'rejects invalid values' do
+      expect {
+        Atlassian::Connect.configure do |config|
+          config.enable_licensing = nil
+        end
+      }.to raise_error(ArgumentError)
+      expect {
+        Atlassian::Connect.configure do |config|
+          config.enable_licensing = 'only booleans allowed'
+        end
+      }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe 'modules' do
+    it 'accepts valid values' do
+
+    end
+
+    it 'rejects invalid values' do
+
+    end
+  end
+
+  describe 'name' do
+    it 'accepts valid values' do
+      Atlassian::Connect.configure do |config|
+        config.name = 'This is an App Name'
+      end
+    end
+
+    it 'rejects invalid values' do
+      expect {
+        Atlassian::Connect.configure do |config|
+          config.name = nil
+        end
+      }.to raise_error(ArgumentError)
+      expect {
+        Atlassian::Connect.configure do |config|
+          config.name = true # not a string
+        end
+      }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe 'scopes' do
+    it 'accepts valid values' do
+
+    end
+
+    it 'rejects invalid values' do
+
     end
   end
 end

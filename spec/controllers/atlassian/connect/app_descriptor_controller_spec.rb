@@ -17,8 +17,12 @@ RSpec.describe Atlassian::Connect::AppDescriptorController, type: :controller do
         expect(response).to be_successful
 
         manifest = JSON.parse(response.body)
-        expect(manifest['enableLicensing']).to eq(Atlassian::Connect::configuration.enable_licensing)
-        expect(manifest['key']).to eq(Atlassian::Connect::configuration.key)
+        config = Atlassian::Connect.configuration
+        expect(manifest['apiVersion']).to eq(config.api_version)
+        expect(manifest['authentication']['type']).to eq('jwt')
+        expect(manifest['baseUrl'].present?).to eq(true)
+        expect(manifest['enableLicensing']).to eq(config.enable_licensing)
+        expect(manifest['key']).to eq(config.key)
       end
     end
   end
