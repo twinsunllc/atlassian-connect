@@ -7,4 +7,11 @@ Atlassian::Connect::Engine.routes.draw do
       post :uninstalled
     end
   end
+
+  root to: 'app_descriptor#index', defaults: { format: :json }
+end
+
+Rails.application.routes.draw do
+  AppDescriptorController = Atlassian::Connect::AppDescriptorController
+  get '/atlassian-connect.json' => 'app_descriptor#index', defaults: { format: :json }
 end

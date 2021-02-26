@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem 'atlassian-jwt'
+gem 'jbuilder'
 
 group :development do
   gem 'byebug'

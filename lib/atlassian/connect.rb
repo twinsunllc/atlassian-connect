@@ -4,27 +4,56 @@ require "atlassian/connect/version"
 
 module Atlassian
   module Connect
-    mattr_accessor :api_version
-    self.api_version = 1
+    class Configuration
+      mattr_accessor :api_version
+      mattr_accessor :description
+      mattr_accessor :enable_licensing
+      mattr_accessor :key
+      mattr_accessor :modules
+      mattr_accessor :name
+      mattr_accessor :post_install_url
+      mattr_accessor :post_update_url
+      mattr_accessor :scopes
+      mattr_accessor :vendor_name
+      mattr_accessor :vendor_url
 
-    mattr_accessor :enable_licensing
+      # Reset configuration to sane defaults.
+      def self.reset
+        self.api_version = 1
+        self.enable_licensing = false
+        self.key = 'TODO.CHANGE-ME'
+        self.modules = {}
+        self.scopes = %w(act_as_user read write)
+      end
 
-    mattr_accessor :key
+      self.reset
+    end
 
-    mattr_accessor :modules
+    class << self
+      attr_writer :configuration
+    end
 
-    mattr_accessor :name
+    module_function
 
-    mattr_accessor :post_install_url
+    def configuration
+      @configuration ||= Configuration.new
+    end
 
-    mattr_accessor :post_update_url
+    def configure
+      yield(configuration)
+      validate_configuration
+    end
 
-    mattr_accessor :scopes
-    self.scopes = [
-        'act_as_user', 'read', 'write'
-    ]
+    private
 
-    mattr_accessor :vendor_name
-    mattr_accessor :vendor_url
+    def self.validate_configuration
+      # validation rules derived from https://developer.atlassian.com/cloud/jira/platform/connect-app-descriptor/
+      raise ArgumentError.new('Invalid value for `key`') unless /^[a-zA-Z0-9\-._]+$/.match?(configuration.key)
+      raise ArgumentError.new('Value for `key` is too long') unless configuration.key.length <= 64
+
+      if !configuration.api_version.nil?
+        raise ArgumentError.new('Invalid value for `api_version`') unless configuration.api_version.is_a?(Integer)
+      end
+    end
   end
 end
