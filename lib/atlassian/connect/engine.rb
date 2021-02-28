@@ -13,6 +13,12 @@ module Atlassian
         end
       end
 
+      initializer 'atlassian_connect.action_controller' do
+        ActiveSupport.on_load :action_controller do
+          helper Atlassian::Connect::ApplicationHelper
+        end
+      end
+
       config.generators do |g|
         g.test_framework :rspec
         g.fixture_replacement :fabrication, :dir => "spec/fabricators"
