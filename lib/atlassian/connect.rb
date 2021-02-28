@@ -12,8 +12,6 @@ module Atlassian
       mattr_accessor :links
       mattr_accessor :modules
       mattr_accessor :name
-      mattr_accessor :post_install_url
-      mattr_accessor :post_update_url
       mattr_accessor :scopes
       mattr_accessor :vendor_name
       mattr_accessor :vendor_url
