@@ -9,7 +9,6 @@ module Atlassian
 
       REQUEST_ID_PARAM_NAME = :request_identifier.freeze
 
-
       @app_install = nil
 
       protected
@@ -26,7 +25,7 @@ module Atlassian
           raise "No valid AppInstall found for client_key #{claim['iss']}" if @app_install.nil?
         elsif params[REQUEST_ID_PARAM_NAME]
           # fall back to detecting the AppInstall based on a request identifier parameter.
-          @app_install = Atlassian::Connect::AppInstall.find(params[REQUEST_ID_PARAM_NAME])
+          @app_install = Atlassian::Connect::ApplicationHelper.get_app_install(request_id: params[REQUEST_ID_PARAM_NAME])
         else
           raise "No token provided to determine AppInstall."
         end
