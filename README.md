@@ -11,7 +11,7 @@ This provides the following features:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'atlassian-connect'
+gem 'atlassian-connect', github: 'twinsunllc/atlassian-connect', branch: 'main'
 ```
 
 And then execute:
