@@ -4,8 +4,8 @@ Atlassian Connect integration for Ruby on Rails.
 This provides the following features:
  - Connect App Descriptor
  - Lifecycle Event Webhooks (enabled, disabled, installed, uninstalled)
- - Tracking of app installs and uninstalls
- - TODO: JWT authentication and token management
+ - Database tracking of app installs and uninstalls
+ - JWT authentication and request management
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -19,7 +19,7 @@ And then execute:
 $ bundle
 ```
 
-Run the following to upgrade your database so you can track app installs:
+Execute the following to upgrade your database so you can track app installs:
 
 ```bash
 bundle exec rake db:migrate
@@ -31,7 +31,7 @@ Ensure you have the Rails cache enabled. By default in development, you can togg
 rails dev:cache
 ```  
 
-Add the following to your page layout's `<head>` section:
+Add the following to your view layout's `<head>` section:
 
 ```ruby
 <%= atlassian_connect_scripts %>
@@ -45,8 +45,9 @@ mount Atlassian::Connect::Engine, at: '/atlassian'
 
 ## Configuration
 
-Add a `config/initializers/atlassian_connect.rb` file. You can specify any of the following settings:
+Add a `config/initializers/atlassian_connect.rb` file. You can specify any of the following settings, which control your App Descriptor:
 ```ruby
+Atlassian::Connect.configure do |config|
   config.description = "Copies project settings and issues into new projects."
   config.enable_licensing = true
   config.key = 'com.twinsunsolutions.jira.copy-project'
@@ -56,12 +57,25 @@ Add a `config/initializers/atlassian_connect.rb` file. You can specify any of th
   config.scopes << 'admin'
   config.vendor_name = 'Twin Sun, LLC'
   config.vendor_url = 'https://twinsunsolutions.com'
+end
 ```
 
 ## Usage
 This gem generates request identifiers to pass around in URL params throughout an Atlassian Connect app. This is to help us maintain some semblance of a user session since Atlassian Cloud apps run in an `iframe` that does not natively support cookies.
 
 This is generally handled for you in most areas. However, you may need to manually include a `request_identifier` parameter in request URLs if you are building AJAX requests to your own application. You can get a new request identifier by calling `@app_install.generate_request_identifier`.
+
+### Licensing
+
+We utilize [Atlassian Marketplace's License API for Cloud Apps](https://developer.atlassian.com/platform/marketplace/license-api-for-cloud-apps/). License enforcement is required for paid apps in the Atlassian Marketplace.
+
+To remove all licensing checks, set `Atlassian::Connect.configure.enable_licensing = false`.
+
+To ignore licensing during development, add the following to your project's environment variables:
+
+```
+IGNORE_ATLASSIAN_LICENSING=true
+```
 
 ## Testing
 Execute the following to migrate the database and test against the `spec/dummy` app:

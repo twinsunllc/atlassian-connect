@@ -32,8 +32,16 @@ module Atlassian
       end
 
       def ensure_licensed
-        return if ignore_jira_licensing?
+        return if ignore_atlassian_licensing?
 
+        jwt_request_token = params[:jwt] ||
+            (request.headers['Authorization'] ? request.headers['Authorization'].sub!('JWT ', '') : nil)
+        if !jwt_request_token
+          Rails.logger.warn "Ignoring missing JWT header and bypassing license checks."
+          return
+        end
+
+        claim, jwt_header = Atlassian::Jwt.decode(jwt_request_token, nil, false)
         candidate_qsh = Atlassian::Jwt.create_query_string_hash(request.fullpath, request.method, request.base_url)
         if !candidate_qsh.eql?(claim['qsh'])
           raise "Invalid query string hash for params #{params.to_json}"
@@ -54,8 +62,8 @@ module Atlassian
 
       private
 
-      def ignore_jira_licensing?
-        ENV['IGNORE_JIRA_LICENSING'].eql?('true')
+      def ignore_atlassian_licensing?
+        ENV['IGNORE_ATLASSIAN_LICENSING'].eql?('true')
       end
     end
   end
