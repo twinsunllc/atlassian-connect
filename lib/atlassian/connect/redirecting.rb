@@ -4,13 +4,14 @@ module ActionController::Redirecting
     raise AbstractController::DoubleRenderError if response_body
 
     if @app_install.present?
-      Rails.logger.info("REDIRECTING: #{@app_install}")
+      # Add a request identifier to the redirect URL so we can keep track of which AppInstall initiated the request.
+      request_identifier = @app_install.generate_request_identifier
       if options.is_a?(String)
-        options = "#{options}?&#{Atlassian::Connect::Controller::REQUEST_ID_PARAM_NAME}=#{@app_install.generate_request_id}"
+        options = "#{options}?&#{Atlassian::Connect::Controller::REQUEST_ID_PARAM_NAME}=#{request_identifier}"
       elsif options.is_a?(Hash)
-        options[Atlassian::Connect::Controller::REQUEST_ID_PARAM_NAME] = @app_install.generate_request_id
+        options[Atlassian::Connect::Controller::REQUEST_ID_PARAM_NAME] = request_identifier
       else
-        Rails.logger.warn "Unhandled options type for `redirect_to`. Options are a #{options.class}"
+        Rails.logger.warn "Unhandled options type for `redirect_to`. The `options` argument is a #{options.class}"
       end
     end
 

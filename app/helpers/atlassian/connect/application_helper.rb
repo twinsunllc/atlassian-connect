@@ -1,6 +1,11 @@
 module Atlassian
   module Connect
     module ApplicationHelper
+
+      # Injects the Atlassian Connect JavaScript SDK and supporting scripts into a page or layout. Whenever possible,
+      # this script will append request identifiers to URLs in forms.
+      # We generate request identifiers to pass around in URL params. This is to help us maintain some semblance of a
+      # user session since Atlassian Cloud apps run in an iframe that does not natively support cookies.
       def atlassian_connect_scripts
         scripts = <<-SCRIPTS
           <script src="https://connect-cdn.atl-paas.net/all.js" data-options="sizeToParent:true;resize:false"></script>
@@ -35,10 +40,11 @@ module Atlassian
         SCRIPTS
 
         scripts = scripts.sub('APP_KEY', Atlassian::Connect.configuration.key)
-        scripts = scripts.sub('REQUEST_ID', @app_install.present? ? @app_install.generate_request_id : '')
+        scripts = scripts.sub('REQUEST_ID', @app_install.present? ? @app_install.generate_request_identifier : '')
 
         return scripts.html_safe
       end
+
     end
   end
 end

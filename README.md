@@ -58,6 +58,11 @@ Add a `config/initializers/atlassian_connect.rb` file. You can specify any of th
   config.vendor_url = 'https://twinsunsolutions.com'
 ```
 
+## Usage
+This gem generates request identifiers to pass around in URL params throughout an Atlassian Connect app. This is to help us maintain some semblance of a user session since Atlassian Cloud apps run in an `iframe` that does not natively support cookies.
+
+This is generally handled for you in most areas. However, you may need to manually include a `request_identifier` parameter in request URLs if you are building AJAX requests to your own application. You can get a new request identifier by calling `@app_install.generate_request_identifier`.
+
 ## Testing
 Execute the following to migrate the database and test against the `spec/dummy` app:
 
