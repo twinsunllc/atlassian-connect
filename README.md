@@ -50,13 +50,13 @@ Add a `config/initializers/atlassian_connect.rb` file. You can specify any of th
 Atlassian::Connect.configure do |config|
   config.description = "Copies project settings and issues into new projects."
   config.enable_licensing = true
-  config.key = 'com.twinsunsolutions.jira.copy-project'
+  config.key = 'com.example.jira.example-app'
   config.links = {}
   config.modules = {}
-  config.name = 'Copy Projects for Jira Cloud'
+  config.name = 'My App for Jira Cloud'
   config.scopes << 'admin'
-  config.vendor_name = 'Twin Sun, LLC'
-  config.vendor_url = 'https://twinsunsolutions.com'
+  config.vendor_name = 'My Company'
+  config.vendor_url = 'https://example.com'
 end
 ```
 
