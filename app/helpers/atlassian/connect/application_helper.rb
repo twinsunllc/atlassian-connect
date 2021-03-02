@@ -39,11 +39,6 @@ module Atlassian
 
         return scripts.html_safe
       end
-
-      def self.get_app_install(request_id:)
-        app_install_id = Rails.cache.read("request-id-#{request_id}")
-        return app_install_id.present? ? Atlassian::Connect::AppInstall.find(app_install_id) : nil
-      end
     end
   end
 end
