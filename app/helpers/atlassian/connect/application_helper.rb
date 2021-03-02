@@ -35,15 +35,9 @@ module Atlassian
         SCRIPTS
 
         scripts = scripts.sub('APP_KEY', Atlassian::Connect.configuration.key)
-        scripts = scripts.sub('REQUEST_ID', @app_install.present? ? generate_request_id(app_install: @app_install) : '')
+        scripts = scripts.sub('REQUEST_ID', @app_install.present? ? @app_install.generate_request_id : '')
 
         return scripts.html_safe
-      end
-
-      def generate_request_id(app_install:)
-        request_id = "#{SecureRandom.uuid}#{app_install.id}#{rand(1000...9999)}"
-        Rails.cache.write("request-id-#{request_id}", app_install.id)
-        return request_id
       end
 
       def self.get_app_install(request_id:)
