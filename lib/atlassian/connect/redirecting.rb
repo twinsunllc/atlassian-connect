@@ -3,7 +3,7 @@ module ActionController::Redirecting
     raise ActionControllerError.new("Cannot redirect to nil!") unless options
     raise AbstractController::DoubleRenderError if response_body
 
-    puts "DOING WHAT I WANT."
+    # TODO add session var.
 
     self.status        = _extract_redirect_to_status(options, response_status)
     self.location      = _compute_redirect_to_location(options)
