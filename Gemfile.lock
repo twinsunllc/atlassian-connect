@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     atlassian-connect (0.1.0)
+      atlassian-jwt
       rails (~> 6.1.3)
 
 GEM

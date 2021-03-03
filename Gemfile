@@ -7,7 +7,6 @@ gem 'atlassian-jwt'
 gem 'jbuilder'
 
 group :development do
-  gem 'byebug'
   gem 'dotenv'
   gem 'sqlite3'
 end
